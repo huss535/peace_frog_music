@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-import covid.utilities.utilities as utilities
+import music.utilities.utilities as utilities
 
 
 home_blueprint = Blueprint(
