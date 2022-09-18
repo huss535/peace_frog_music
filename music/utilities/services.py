@@ -1,8 +1,8 @@
 from typing import Iterable
 import random
 
-from covid.adapters.repository import AbstractRepository
-from covid.domain.model import Article
+from music.adapters.repository import AbstractRepository
+from music.domainmodel import Article
 
 
 def get_tag_names(repo: AbstractRepository):
@@ -11,24 +11,25 @@ def get_tag_names(repo: AbstractRepository):
 
     return tag_names
 
+# TODO we COULD salvage this piece of code to get tracks instead of articles
+# def get_random_articles(quantity, repo: AbstractRepository):
+#     article_count = repo.get_number_of_articles()
 
-def get_random_articles(quantity, repo: AbstractRepository):
-    article_count = repo.get_number_of_articles()
+#     if quantity >= article_count:
+#         # Reduce the quantity of ids to generate if the repository has an insufficient number of articles.
+#         quantity = article_count - 1
 
-    if quantity >= article_count:
-        # Reduce the quantity of ids to generate if the repository has an insufficient number of articles.
-        quantity = article_count - 1
+#     # Pick distinct and random articles.
+#     random_ids = random.sample(range(1, article_count), quantity)
+#     articles = repo.get_articles_by_id(random_ids)
 
-    # Pick distinct and random articles.
-    random_ids = random.sample(range(1, article_count), quantity)
-    articles = repo.get_articles_by_id(random_ids)
-
-    return articles_to_dict(articles)
+#     return articles_to_dict(articles)
 
 
 # ============================================
 # Functions to convert dicts to model entities
 # ============================================
+
 
 def article_to_dict(article: Article):
     article_dict = {
