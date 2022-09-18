@@ -19,3 +19,19 @@ class AbstractRepository(abc.ABC):
         If there is no User with the given user_name, this method returns None.
         """
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_tracks_genre(self, album_name):
+        """ Returns the User named user_name from the repository.
+
+        If there is no User with the given user_name, this method returns None.
+        """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_tracks_artist(self, album_name):
+        """ Returns the User named user_name from the repository.
+
+        If there is no User with the given user_name, this method returns None.
+        """
+        raise NotImplementedError

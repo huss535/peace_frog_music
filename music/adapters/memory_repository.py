@@ -21,7 +21,23 @@ class MemoryRepository(AbstractRepository):
                     tracks.append(song)
         return tracks
 
+    def get_tracks_genre(self,genre_name):
+        tracks = []
+        for song in self.tracks:
+            if len(song.genres) != 0:
+                for genre in song.genres:
+                    if genre.name == genre_name:
+                        tracks.append(song)
+        return tracks
+
+    def get_tracks_artist(self, artist_name):
+        tracks = []
+        for song in self.tracks:
+            if song.artist.full_name == artist_name:
+                tracks.append(song)
+
+        return tracks
 
 
 trial = MemoryRepository()
-print(trial.get_tracks_album("Boss of Goth"))
+print(trial.get_tracks_artist("AWOL"))
