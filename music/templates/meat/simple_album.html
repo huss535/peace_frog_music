@@ -1,16 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Simple Album</title>
-</head>
-<body>
-    <h1>CompSci 235 2022 - MY MUSIC LIBRARY</h1>
-    <h2>{{ album.title }}</h2>
-    <p>Album Duration: <b>{{ album.track_duration }}</b></p>
-    <p>Album URL: {{ album.album_url }}</p>
-    <p>Type: {{ album.album_type }}</p>
-    <p>Release Year: {{ album.release_year }}</p>
-    <!--  -->
-</body>
-</html>
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main id="main">
+    <header id="track-header">
+        <h1>{{ album.title }}</h1>
+        <!-- Maybe put page number here? -->
+    </header>
+
+    <body>
+        <h1>CompSci 235 2022 - MY MUSIC LIBRARY</h1>
+        <h2>{{ album.title }}</h2>
+        <p>Album Duration: <b>{{ album.track_duration }}</b></p>
+        <p>Album URL: {{ album.album_url }}</p>
+        <p>Type: {{ album.album_type }}</p>
+        <p>Release Year: {{ album.release_year }}</p>
+        <!--  -->
+    </body>
+
+</main>
+{% endblock %}
