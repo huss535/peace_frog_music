@@ -2,14 +2,15 @@ from typing import Iterable
 import random
 
 from music.adapters.repository import AbstractRepository
-from music.domainmodel import Article
+#from music.domainmodel import Article
 
 
-def get_tag_names(repo: AbstractRepository):
-    tags = repo.get_tags()
-    tag_names = [tag.tag_name for tag in tags]
+def get_tracks_names(repo: AbstractRepository):
+    pass
+    #tags = repo.get_tags()
+    #tag_names = [tag.tag_name for tag in tags]
 
-    return tag_names
+    #return tag_names
 
 # TODO we COULD salvage this piece of code to get tracks instead of articles
 # def get_random_articles(quantity, repo: AbstractRepository):
@@ -31,14 +32,7 @@ def get_tag_names(repo: AbstractRepository):
 # ============================================
 
 
-def article_to_dict(article: Article):
-    article_dict = {
-        'date': article.date,
-        'title': article.title,
-        'image_hyperlink': article.image_hyperlink
-    }
-    return article_dict
 
 
-def articles_to_dict(articles: Iterable[Article]):
-    return [article_to_dict(article) for article in articles]
+
+

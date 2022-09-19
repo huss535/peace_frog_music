@@ -19,20 +19,23 @@ def create_some_track():
 def create_app(test_config=None):
     app = Flask(__name__)
     app.config.from_object('config.Config')
-    data_path_album = str(Path('music') / 'adapters' / 'data'/'raw_albums_excerpt.csv')
-    data_path_tracks = str(Path('music') / 'adapters' / 'data'/'raw_tracks_excerpt.csv')
+    data_path_album = str(Path('music') / 'adapters' / 'data' / 'raw_albums_excerpt.csv')
+    data_path_tracks = str(Path('music') / 'adapters' / 'data' / 'raw_tracks_excerpt.csv')
     if test_config is not None:
         app.config.from_mapping(test_config)
         data_path = app.config['TEST_DATA_PATH']
 
     repo.repo_instance = MemoryRepository()
 
-    populate(data_path_album,data_path_tracks,repo.repo_instance)
+    populate(data_path_album, data_path_tracks, repo.repo_instance)
 
-    @app.route('/')
-    def home():
-        some_track = create_some_track()
-        # Use Jinja to customize a predefined html page rendering the layout for showing a single track.
-        return render_template('header.html')
-
+    # @app.route('/')
+    # def home():
+    # some_track = create_some_track()
+    # # Use Jinja to customize a predefined html page rendering the layout for showing a single track.
+    # return render_template('header.html')
+    with app.app_context():
+        # Register blueprints.
+        from .home import home
+        app.register_blueprint(home.home_blueprint)
     return app
