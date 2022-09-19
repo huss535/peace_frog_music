@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, redirect, url_for, session
 
-import covid.adapters.repository as repo
-import covid.utilities.services as services
+import music.adapters.repository as repo
+import music.utilities.services as services
 
 
 # Configure Blueprint.
