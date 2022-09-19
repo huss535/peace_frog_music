@@ -1,19 +1,36 @@
 import os
 from music.adapters.repository import AbstractRepository
 from music.adapters.csvdatareader import TrackCSVReader
+from music.domainmodel.track import Track
 
 
 class MemoryRepository(AbstractRepository):
 
     def __init__(self):
-
+        self.__tracks_index = dict()
         self.tracks = []
 
-    def add_tracks(self,albums,tracks):
+    def add_track(self,albums,track: Track):
         #album_path = str(os.path.abspath("data/raw_albums_excerpt.csv"))
         #tracks_path = str(os.path.abspath("data/raw_tracks_excerpt.csv"))
-        file_reader = TrackCSVReader(albums, tracks)
+        file_reader = TrackCSVReader(albums, track)
         self.tracks = file_reader.read_csv_files()
+        self.__tracks_index[track.id] = track
+
+    def get_track(self, id: int) -> Track:
+        track = None
+        try:
+            track = self.__tracks_index[id]
+        except KeyError:
+            pass
+        return track
+
+    def get_track_by_id(self, id_list):
+        # Strip out any ids in id_list that don't represent Track ids in the repository.
+        existing_ids = [id for id in id_list if id in self.__tracks_index]
+        # Fetch the Tracls.
+        tracks = [self.__tracks_index[id] for id in existing_ids]
+        return tracks
 
     def get_number_of_tracks(self):
         return len(self.tracks)
@@ -42,7 +59,7 @@ class MemoryRepository(AbstractRepository):
         else:
             for song in master_tracks:
                 if song.album is not None:
-
+                    pass
         return tracks
 
     def get_tracks_genre(self, genre_name):

@@ -2,7 +2,7 @@ from typing import Iterable
 import random
 
 from music.adapters.repository import AbstractRepository
-from music.domainmodel import Track
+from music.domainmodel.track import Track
 
 
 def get_tracks_names(repo: AbstractRepository):
