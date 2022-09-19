@@ -7,10 +7,13 @@ class MemoryRepository(AbstractRepository):
 
     def __init__(self):
 
-        album_path = str(os.path.abspath("data/raw_albums_excerpt.csv"))
-        tracks_path = str(os.path.abspath("data/raw_tracks_excerpt.csv"))
-        self.file_reader = TrackCSVReader(album_path, tracks_path)
-        self.tracks = self.file_reader.read_csv_files()
+        self.tracks = []
+
+    def add_tracks(self,albums,tracks):
+        #album_path = str(os.path.abspath("data/raw_albums_excerpt.csv"))
+        #tracks_path = str(os.path.abspath("data/raw_tracks_excerpt.csv"))
+        file_reader = TrackCSVReader(albums, tracks)
+        self.tracks = file_reader.read_csv_files()
 
     def get_tracks_album(self, album_name):
         tracks = []
@@ -36,6 +39,10 @@ class MemoryRepository(AbstractRepository):
                 tracks.append(song)
 
         return tracks
+
+
+def populate(albums,tracks,repo: MemoryRepository):
+    repo.add_tracks(albums,tracks)
 
 
 trial = MemoryRepository()
