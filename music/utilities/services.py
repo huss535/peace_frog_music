@@ -21,7 +21,7 @@ def get_random_tracks(quantity, repo: AbstractRepository):
 
     # Pick distinct and random articles.
     random_ids = random.sample(range(1, tracks_count), quantity)
-    articles = repo.get_tracks_by_id(random_ids)
+    tracks = repo.get_tracks_by_id(random_ids)
 
     return tracks_to_dict(tracks)
 
