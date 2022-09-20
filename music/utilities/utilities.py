@@ -17,11 +17,6 @@ utilities_blueprint = Blueprint(
 
 #     return tag_urls
 
-def get_selected_tracks(quantity=5):
-    tracks = services.get_random_tracks(quantity, repo.repo_instance)
-    for track in tracks:
-        track['hyperlink'] = url_for('track_bp.')
-    return tracks
 
 # def get_selected_articles(quantity=3):
 #     articles = services.get_random_articles(quantity, repo.repo_instance)
