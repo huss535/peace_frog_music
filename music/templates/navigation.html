@@ -2,23 +2,11 @@
     <img id="logo" src="{{ url_for('static', filename='music_logo.png') }}" />
     
     <div>
-        <a class="btn-nav" href="home.html">HOME</a>
+        <a class="btn-nav" href="{{ url_for('home_bp.home') }}">HOME</a>
     </div>
 
     <div>
-      <a class="btn-nav" href="list_of_tracks.html">List of Tracks</a>
-    </div>
-    
-    <div>
-        <a class="btn-nav" href="genre.html">Browse by Genre</a>
-      </div>
-
-    <div>
-        <a class="btn-nav" href="artist.html">Browse by Artist</a>
-    </div>
-
-    <div>
-        <a class="btn-nav" href="album.html">Browse by Album</a>
+      <a class="btn-nav" href="{{ url_for('trackList_bp.trackList') }}">List of Tracks</a>
     </div>
     
     <div id="nav-footer">
