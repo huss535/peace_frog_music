@@ -28,7 +28,7 @@ def create_app(test_config=None):
 
     repo.repo_instance = MemoryRepository()
 
-    populate(data_path_album, data_path_tracks, repo.repo_instance)
+    populate(repo.repo_instance)
 
     # @app.route('/')
     # def home():

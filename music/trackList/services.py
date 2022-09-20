@@ -1,9 +1,9 @@
 from pathlib import Path
 
-from music.adapters.memory_repository import MemoryRepository
+from music.adapters.repository import AbstractRepository
 
 
-def retrieve_tracks(repo: MemoryRepository):
+def retrieve_tracks(repo: AbstractRepository):
 
     repo.add_tracks()
     return repo.tracks

@@ -13,7 +13,7 @@ class MemoryRepository(AbstractRepository):
 
         self.tracks = []
 
-    def add_tracks(self ):
+    def add_tracks(self ) -> object:
         albums = str(Path('music') / 'adapters' / 'data' / 'raw_albums_excerpt.csv')
         tracks = str(Path('music') / 'adapters' / 'data' / 'raw_tracks_excerpt.csv')
         file_reader = TrackCSVReader(albums, tracks)
