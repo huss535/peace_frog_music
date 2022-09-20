@@ -1,6 +1,10 @@
 import os
+from pathlib import Path
+
 from music.adapters.repository import AbstractRepository
 from music.adapters.csvdatareader import TrackCSVReader
+
+from music.domainmodel import track
 
 
 class MemoryRepository(AbstractRepository):
@@ -9,9 +13,9 @@ class MemoryRepository(AbstractRepository):
 
         self.tracks = []
 
-    def add_tracks(self,albums,tracks):
-        #album_path = str(os.path.abspath("data/raw_albums_excerpt.csv"))
-        #tracks_path = str(os.path.abspath("data/raw_tracks_excerpt.csv"))
+    def add_tracks(self ):
+        albums = str(Path('music') / 'adapters' / 'data' / 'raw_albums_excerpt.csv')
+        tracks = str(Path('music') / 'adapters' / 'data' / 'raw_tracks_excerpt.csv')
         file_reader = TrackCSVReader(albums, tracks)
         self.tracks = file_reader.read_csv_files()
 
@@ -41,8 +45,8 @@ class MemoryRepository(AbstractRepository):
         return tracks
 
 
-def populate(albums,tracks,repo: MemoryRepository):
-    repo.add_tracks(albums,tracks)
+def populate(repo: MemoryRepository):
+    repo.add_tracks()
 
 
 trial = MemoryRepository()

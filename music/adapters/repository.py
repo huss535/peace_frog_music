@@ -10,6 +10,9 @@ class RepositoryException(Exception):
 
 
 class AbstractRepository(abc.ABC):
+    def __init__(self):
+        self.tracks = []
+
     @abc.abstractmethod
     def add_tracks(self,albums,tracks):
         raise NotImplementedError

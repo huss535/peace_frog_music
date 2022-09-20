@@ -7,6 +7,7 @@ from flask import Flask, render_template
 from music.adapters.memory_repository import populate, MemoryRepository
 
 from music.domainmodel.track import Track
+from music.trackList import trackList
 
 
 def create_some_track():
@@ -38,4 +39,5 @@ def create_app(test_config=None):
         # Register blueprints.
         from .home import home
         app.register_blueprint(home.home_blueprint)
+        app.register_blueprint(trackList.track_blueprint)
     return app

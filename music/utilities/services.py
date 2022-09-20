@@ -4,7 +4,6 @@ import random
 from music.adapters.repository import AbstractRepository
 from music.domainmodel.track import Track
 
-
 def get_tracks_names(repo: AbstractRepository):
     pass
     #tags = repo.get_tags()
