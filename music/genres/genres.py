@@ -22,3 +22,5 @@ def tracks_by_genre(genre_name):
 @genres_blueprint.route('/searchGenre', methods=['GET', 'POST'])
 def form_page():
     return render_template('meat/search_genres.html')
+
+
