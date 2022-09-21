@@ -8,6 +8,7 @@ from flask import Flask, render_template
 from music.adapters.memory_repository import MemoryRepository, populate
 
 from music.domainmodel.track import Track
+from music.genres import genres
 from music.trackList import trackList
 
 
@@ -41,4 +42,6 @@ def create_app(test_config=None):
         app.register_blueprint(home.home_blueprint)
         from .trackList import trackList
         app.register_blueprint(trackList.track_blueprint)
+        from music.genres.genres import handle_data
+        app.register_blueprint(genres.genres_blueprint)
     return app
