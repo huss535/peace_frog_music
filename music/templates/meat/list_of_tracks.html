@@ -14,7 +14,9 @@
             <br>
         <h2>List of Tracks</h2>
         <!-- Maybe be able to click on Artist and ALbum -->
-        {% for track in track_list %}
+        {% if track_list != [] %}
+
+         {% for track in track_list %}
 
         <p> <a href= {{track.track_url }}><span class="bluebutton1">{{track.title}}</span></a> </p>
             <p>Genres:
@@ -26,6 +28,13 @@
         <p>Album: {{ track.album.title }}</p>
             <br>
         {% endfor %}
+        {% endif %}
+
+        {% if track_list == [] %}
+        <br>
+            <p> No tracks to show</p>
+        <br>
+       {% endif %}
         <div class = 'aligner'>
             <button class="btn-general" onclick="location.href='{{url_for('trackList_bp.backward_trackList')}}'">Previous</button>
             <button class="btn-general" onclick="location.href='{{url_for('trackList_bp.trackList')}}'">Next</button>
