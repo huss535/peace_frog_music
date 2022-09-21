@@ -10,14 +10,25 @@ from music.domainmodel import track
 class MemoryRepository(AbstractRepository):
 
     def __init__(self):
-
         self.tracks = []
+        self.genres = set()
+        self.prev_first = 0
+        self.prev_last = 0
+        self.first = 0
+        self.last = 0
 
-    def add_tracks(self ) -> object:
-        albums = str(Path('music') / 'adapters' / 'data' / 'raw_albums_excerpt.csv')
-        tracks = str(Path('music') / 'adapters' / 'data' / 'raw_tracks_excerpt.csv')
-        file_reader = TrackCSVReader(albums, tracks)
+    def add_tracks(self, alb):
+        # alb = os.path.abspath("data")
+        # rel = os.path.abspath("data")
+        # alb = alb + "/raw_albums_excerpt.csv"
+        # rel = rel + "/raw_tracks_excerpt.csv"
+
+        album = str(alb) + '/raw_albums_excerpt.csv'
+        track = str(alb) + "/raw_tracks_excerpt.csv"
+        file_reader = TrackCSVReader(album, track)
         self.tracks = file_reader.read_csv_files()
+        self.tracks.sort()
+        self.genres = file_reader.dataset_of_genres
 
     def get_tracks_album(self, album_name):
         tracks = []
@@ -45,9 +56,5 @@ class MemoryRepository(AbstractRepository):
         return tracks
 
 
-def populate(repo: MemoryRepository):
-    repo.add_tracks()
-
-
-trial = MemoryRepository()
-print(trial.get_tracks_artist("AWOL"))
+def populate(alb, repo: MemoryRepository):
+    repo.add_tracks(alb)

@@ -5,22 +5,31 @@
 <main id="main">
     <header id="track-header">
         <h1>Song List</h1>
-        <!-- Maybe put page number here? -->
+
     </header>
 
 
     <body>
         <h1>CompSci 235 2022 - MY MUSIC LIBRARY</h1>
+            <br>
         <h2>List of Tracks</h2>
         <!-- Maybe be able to click on Artist and ALbum -->
         {% for track in track_list %}
-            <p>Track Duration: <b>{{ track.track_duration }}</b></p>
-            <p>Track URL: {{ track.track_url }}</p>
-            <p>Genres: {{ track.genres }}</p>
-            <p>Artist: {{ track.artist }}</p>
-            <p>Album: {{ track.album }}</p>
-        {% endfor %}
 
+        <p> <a href= {{track.track_url }}><span class="bluebutton1">{{track.title}}</span></a> </p>
+            <p>Genres:
+             {% for genre in track.genres %}
+            {{genre.name}}
+            {% endfor %}
+            </p>
+            <p>Artist: {{ track.artist.full_name }}</p>
+        <p>Album: {{ track.album.title }}</p>
+            <br>
+        {% endfor %}
+        <div class = 'aligner'>
+            <button class="btn-general" onclick="location.href='{{url_for('trackList_bp.backward_trackList')}}'">Previous</button>
+            <button class="btn-general" onclick="location.href='{{url_for('trackList_bp.trackList')}}'">Next</button>
+        </div>
     </body>
 
 </main>

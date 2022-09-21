@@ -9,6 +9,15 @@
   text-decoration: none;
   font-family: 'Josefin Sans', sans-serif;
 }
+  .bluebutton1 {
+
+    padding: 5px;
+    border:2px solid #6495ED;
+    background-color: #008B8B;
+    border-radius: 10px;
+    padding-top: 7px;
+    display:inline-block;
+  }
 
 body,
 html {
@@ -72,6 +81,12 @@ img {
     margin: 5px;
     float:left;
     /*#opacity: 0.6;*/
+}
+
+.aligner{
+
+text-align: right;
+
 }
 
 .btn-general:hover {
