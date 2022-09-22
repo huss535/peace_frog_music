@@ -4,7 +4,8 @@
 
 <main id="main">
     <header id="track-header">
-        <h1>Tracks in genre</h1>
+        <h1>Tracks in Genre</h1>
+        <h2>{{}}</h2>
 
     </header>
 
@@ -14,8 +15,15 @@
 
 
         {% for track in track_list %}
-        <li>{{track.title}}</li>
-
+        <p> <a href= {{ track.track_url }}><span class="bluebutton1">{{track.title}}</span></a> </p>
+            <p>Genres:
+             {% for genre in track.genres %}
+            {{genre.name}}
+            {% endfor %}
+            </p>
+            <p>Artist: {{ track.artist.full_name }}</p>
+        <p>Album: {{ track.album.title }}</p>
+            <br>
         {% endfor %}
     </body>
 
