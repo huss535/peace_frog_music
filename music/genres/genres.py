@@ -12,7 +12,7 @@ genres_blueprint = Blueprint(
 def handle_data():
     projectpath = request.form['projectFilepath']
     tracks = tracks_by_genre(projectpath)
-    return render_template("meat/genre.html", track_list=tracks)
+    return render_template("meat/genre.html", track_list=tracks[0],genre_name =tracks[1] )
 
 
 def tracks_by_genre(genre_name):

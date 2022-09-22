@@ -45,7 +45,7 @@ class MemoryRepository(AbstractRepository):
                 for genre in song.genres:
                     if genre.name == genre_name:
                         tracks.append(song)
-        return tracks
+        return tracks, genre_name
 
     def get_tracks_artist(self, artist_name):
         tracks = []
