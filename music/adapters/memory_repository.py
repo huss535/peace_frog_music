@@ -53,7 +53,7 @@ class MemoryRepository(AbstractRepository):
             if song.artist.full_name == artist_name:
                 tracks.append(song)
 
-        return tracks
+        return tracks, artist_name
 
 
 def populate(alb, repo: MemoryRepository):

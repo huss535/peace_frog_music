@@ -4,15 +4,27 @@
 
 <main id="main">
     <header id="track-header">
-        <h1>{{ artist.full_name }}</h1>
+        <h1>Tracks by Artist</h1>
+        <h2>{{ artist_name }}</h2>
         <!-- Maybe put page number here? -->
     </header>
 
     <body>
-        <h1>CompSci 235 2022 - MY MUSIC LIBRARY</h1>
-        <h2>{{ artist.full_name }}</h2>
-        <!-- Perhaps expand artist python file to show relevant albums, genres, and tracks-->
+        {% if track_list|length == 0 %}
+            <p>No Tracks were found!<p>
+        {% else %}
+            {% for track in track_list %}
+            <p> <a href= {{ track.track_url }}><span class="bluebutton1">{{track.title}}</span></a> </p>
+                <p>Genres:
+                {% for genre in track.genres %}
+                {{ genre.name }}
+                {% endfor %}
+                </p>
+                <p>Artist: {{ track.artist.full_name }}</p>
+            <p>Album: {{ track.album.title }}</p>
+                <br>
+            {% endfor %}
+        {% endif %}
     </body>
-
 </main>
 {% endblock %}
