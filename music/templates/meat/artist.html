@@ -14,15 +14,15 @@
             <p>No Tracks were found!<p>
         {% else %}
             {% for track in track_list %}
-            <p> <a href= {{ track.track_url }}><span class="bluebutton1">{{track.title}}</span></a> </p>
+            <div class = 'track'><p> <a href= {{ track.track_url }}><span class="bluebutton1">{{track.title}}</span></a> </p>
                 <p>Genres:
                 {% for genre in track.genres %}
-                {{ genre.name }}
+                    {{ genre.name }}
                 {% endfor %}
                 </p>
                 <p>Artist: {{ track.artist.full_name }}</p>
             <p>Album: {{ track.album.title }}</p>
-                <br>
+            </div>
             {% endfor %}
         {% endif %}
     </body>
