@@ -39,9 +39,7 @@ def register():
         title='Register',
         form=form,
         user_name_error_message=user_name_not_unique,
-        handler_url=url_for('authentication_bp.register'),
-        selected_articles=utilities.get_selected_articles(),
-        tag_urls=utilities.get_tags_and_urls()
+        handler_url=url_for('authentication_bp.register')
     )
 
 
@@ -79,9 +77,7 @@ def login():
         title='Login',
         user_name_error_message=user_name_not_recognised,
         password_error_message=password_does_not_match_user_name,
-        form=form,
-        selected_articles=utilities.get_selected_articles(),
-        tag_urls=utilities.get_tags_and_urls()
+        form=form
     )
 
 
