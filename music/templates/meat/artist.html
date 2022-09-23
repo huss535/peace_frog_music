@@ -5,14 +5,16 @@
 <main id="main">
     <header id="track-header">
         <h1>Tracks by Artist</h1>
-        <h2>{{ artist_name }}</h2>
         <!-- Maybe put page number here? -->
     </header>
 
     <body>
+        <h1>{{ artist_name }}</h1>
         {% if track_list|length == 0 %}
-            <p>No Tracks were found!<p>
+            <h2>No Tracks were found!</h2>
+            <p>Please check if you have properly spelt and capitalised your search.</p>
         {% else %}
+        <h2>List of Tracks</h2>
             {% for track in track_list %}
             <div class = 'track'><p> <a href= {{ track.track_url }}><span class="bluebutton1">{{track.title}}</span></a> </p>
                 <p>Genres:
