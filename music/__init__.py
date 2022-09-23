@@ -10,6 +10,7 @@ from music.adapters.memory_repository import MemoryRepository, populate
 from music.domainmodel.track import Track
 from music.genres import genres
 from music.artists import artists
+from music.albums import albums
 from music.trackList import trackList
 from music.authentication import authentication
 
@@ -42,12 +43,19 @@ def create_app(test_config=None):
         # Register blueprints.
         from .home import home
         app.register_blueprint(home.home_blueprint)
+        
         from .trackList import trackList
         app.register_blueprint(trackList.track_blueprint)
+
         from music.genres.genres import handle_data
         app.register_blueprint(genres.genres_blueprint)
+
+        from music.albums.albums import handle_data
+        app.register_blueprint(albums.albums_blueprint)
+        
         from music.artists.artists import handle_data
         app.register_blueprint(artists.artists_blueprint)
+
         from .authentication import authentication
         app.register_blueprint(authentication.authentication_blueprint)
     return app

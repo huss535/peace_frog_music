@@ -4,18 +4,29 @@
 
 <main id="main">
     <header id="track-header">
-        <h1>{{ album.title }}</h1>
-        <!-- Maybe put page number here? -->
+        <h1>Tracks in Album</h1>
     </header>
 
     <body>
-        <h1>CompSci 235 2022 - MY MUSIC LIBRARY</h1>
-        <h2>{{ album.title }}</h2>
-        <p>Album Duration: <b>{{ album.track_duration }}</b></p>
-        <p>Album URL: {{ album.album_url }}</p>
-        <p>Type: {{ album.album_type }}</p>
-        <p>Release Year: {{ album.release_year }}</p>
-        <!--  -->
+        <h1>{{album_name}}</h1>
+            <br>
+        {% if track_list|length == 0 %}
+            <h2>No Tracks were found!</h2>
+            <p>Please check if you have properly spelt and capitalised your search.</p>
+        {% else %}
+            <h2>List of Tracks</h2>
+            {% for track in track_list %}
+            <p> <a href= {{ track.track_url }}><span class="bluebutton1">{{track.title}}</span></a> </p>
+                <p>Albums:
+                {% for album in track.albums %}
+                {{album.name}}
+                {% endfor %}
+                </p>
+                <p>Artist: {{ track.artist.full_name }}</p>
+            <p>Album: {{ track.album.title }}</p>
+                <br>
+            {% endfor %}
+        {% endif %}
     </body>
 
 </main>
