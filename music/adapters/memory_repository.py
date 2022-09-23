@@ -58,16 +58,6 @@ class MemoryRepository(AbstractRepository):
 
         return tracks, artist_name
 
-    def get_track(self, track_name):
-        tracks = []
-        for song in self.tracks:
-            if song.track_title == track_name:
-                tracks.append(song)
-        return song, track_name
-
-
-
-
 
 def populate(alb, repo: MemoryRepository):
     repo.add_tracks(alb)
