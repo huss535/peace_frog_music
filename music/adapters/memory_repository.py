@@ -33,13 +33,14 @@ class MemoryRepository(AbstractRepository):
         self.genres = file_reader.dataset_of_genres
         self.albums = file_reader.dataset_of_albums
         self.artists = file_reader.dataset_of_artists
+
     def get_tracks_album(self, album_name):
         tracks = []
         for song in self.tracks:
             if song.album is not None:
                 if type(song.album.title) == str and song.album.title == album_name:
                     tracks.append(song)
-        return tracks
+        return tracks, album_name
 
     def get_tracks_genre(self, genre_name):
         tracks = []
@@ -62,7 +63,7 @@ class MemoryRepository(AbstractRepository):
 def populate(alb, repo: MemoryRepository):
     repo.add_tracks(alb)
 
-#repo = MemoryRepository()
-#alb = os.path.abspath("data")
-#repo.add_tracks(alb)
-#print(len(repo.tracks))
+# repo = MemoryRepository()
+# alb = os.path.abspath("data")
+# repo.add_tracks(alb)
+# print(len(repo.tracks))

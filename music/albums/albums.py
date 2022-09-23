@@ -21,6 +21,6 @@ def tracks_by_album(album_name):
 
 @albums_blueprint.route('/searchAlbum', methods=['GET', 'POST'])
 def form_page():
-    return render_template('meat/search_albums.html')
+    return render_template('meat/search_album.html')
 
 
