@@ -12,6 +12,8 @@ class MemoryRepository(AbstractRepository):
     def __init__(self):
         self.tracks = []
         self.genres = set()
+        self.albums = set()
+        self.artists = set()
         self.prev_first = 0
         self.prev_last = 0
         self.first = 0
@@ -29,7 +31,8 @@ class MemoryRepository(AbstractRepository):
         self.tracks = file_reader.read_csv_files()
         self.tracks.sort()
         self.genres = file_reader.dataset_of_genres
-
+        self.albums = file_reader.dataset_of_albums
+        self.artists = file_reader.dataset_of_artists
     def get_tracks_album(self, album_name):
         tracks = []
         for song in self.tracks:
@@ -58,3 +61,8 @@ class MemoryRepository(AbstractRepository):
 
 def populate(alb, repo: MemoryRepository):
     repo.add_tracks(alb)
+
+#repo = MemoryRepository()
+#alb = os.path.abspath("data")
+#repo.add_tracks(alb)
+#print(len(repo.tracks))
