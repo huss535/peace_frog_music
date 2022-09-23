@@ -10,13 +10,37 @@
 
     <body>
         <h1>CompSci 235 2022 - MY MUSIC LIBRARY</h1>
-        <h2>{{ track.title }}</h2>
-        <p>Track Duration: <b>{{ track.track_duration }}</b></p>
-        <p>Track URL: {{ track.track_url }}</p>
-        <p>Genres: {{ track.genres }}</p>
-        <p>Artist: {{ track.artist }}</p>
-        <p>Album: {{ track.album }}</p>
-        <!-- Maybe be able to click on Artist and Album -->
+        {% if track_list|length == 0 %}
+            <h2>{{ track_name }} is not found!</h2>
+            <p>Are you sure you properly spelt and capatlised the song name?</p>
+        {% else %}
+        <!-- <div class = 'track'><p> <a href= {{ track.track_url }}><span class="bluebutton1">{{track.title}}</span></a> </p> -->
+        {% for track in track_list %}
+            <h2>{{ track.title }}</h2>
+            <p>Track Duration: <b>{{ track.track_duration }}</b></p>
+            <p>Track URL: {{ track.track_url }}</p>
+            <p>Genres:
+                {% for genre in track.genres %}
+                    {{ genre.name }}
+                {% endfor %}
+            </p>
+            <p>Artist: {{ track.artist }}</p>
+            <p>Album: {{ track.album }}</p>
+        {% endfor %}
+        {% endif %}
+        </div>
+        <div style="float:right">
+            {% if track.comments|length > 0 and track.id != show_comments_for_track %}
+                <button class="btn-general" onclick="location.href='{{ track.view_comment_url }}'">{{ track.comments|length }} comments</button>
+            {% endif %}
+            <button class="btn-general" onclick="location.href='{{ article.add_comment_url }}'">Comment</button>
+        </div>
+        {% if article.id == show_comments_for_article %}
+        <div style="clear:both">
+            {% for comment in track.comments %}
+                <p>{{comment.comment_text}}, by {{comment.user_name}}, {{comment.timestamp}}</p>
+            {% endfor %}
+        </div>
     </body>
 
 </main>
