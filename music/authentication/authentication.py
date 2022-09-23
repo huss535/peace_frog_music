@@ -71,8 +71,7 @@ def login():
 
         except services.AuthenticationException:
             # Authentication failed, set a suitable error message.
-            password_does_not_match_user_name = 'Password does not match supplied user name - please check and try ' \
-                                                'again '
+            password_does_not_match_user_name = 'Password does not match supplied user name - please check and try again'
 
     # For a GET or a failed POST, return the Login Web page.
     return render_template(

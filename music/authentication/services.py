@@ -24,9 +24,9 @@ def add_user(user_name: str, password: str, repo: AbstractRepository):
 
     # Encrypt password so that the database doesn't store passwords 'in the clear'.
     password_hash = generate_password_hash(password)
-    count = len(repo.users)
+
     # Create and store the new User, with password encrypted.
-    user = User(count + 1, user_name, password_hash)
+    user = User(user_name, password_hash)
     repo.add_user(user)
 
 
