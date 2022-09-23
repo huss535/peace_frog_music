@@ -31,7 +31,7 @@ def create_app(test_config=None):
 
     repo.repo_instance = MemoryRepository()
 
-    populate(alb,repo.repo_instance)
+    populate(alb, repo.repo_instance)
 
     # @app.route('/')
     # def home():
