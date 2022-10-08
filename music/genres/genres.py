@@ -1,6 +1,4 @@
 from flask import Blueprint, render_template, url_for, request
-from music.adapters.memory_repository import MemoryRepository
-from music.trackList.services import retrieve_tracks
 import music.adapters.repository as repo
 import music.genres.services as services
 

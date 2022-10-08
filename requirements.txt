@@ -16,3 +16,5 @@ pyparsing~=3.0.9
 setuptools~=65.3.0
 packaging~=21.3
 WTForms~=3.0.1
+wheel~=0.37.1
+SQLAlchemy~=1.4.41
