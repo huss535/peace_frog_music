@@ -1,3 +1,4 @@
+from abc import ABC
 from datetime import date
 from typing import List
 
@@ -37,3 +38,20 @@ class SessionContextManager:
     def close_current_session(self):
         if not self.__session is None:
             self.__session.close()
+
+
+class database_repository(AbstractRepository):
+
+    def __init__(self, session_factory):
+        self._session_cm = SessionContextManager(session_factory)
+
+    def close_session(self):
+        self._session_cm.close_current_session()
+
+    def reset_session(self):
+        self._session_cm.reset_session()
+
+    def add_tracks(self, track):
+        with self._session_cm as scm:
+            scm.session.add(track)
+            scm.commit()

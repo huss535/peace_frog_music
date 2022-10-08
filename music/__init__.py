@@ -3,9 +3,18 @@ import os
 from _testcapi import test_config
 from pathlib import Path
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import clear_mappers, sessionmaker
+from sqlalchemy.pool import NullPool
+
 import music.adapters.repository as repo
 from flask import Flask, render_template
-from music.adapters.memory_repository import MemoryRepository, populate
+
+from music.adapters import memory_repository, repository_populate
+from music.adapters.database_repository import database_repository
+from music.adapters.memory_repository import MemoryRepository
+from music.adapters.orm import map_model_to_tables, metadata
+from music.adapters.repository_populate import populate
 
 from music.domainmodel.track import Track
 from music.genres import genres
@@ -43,7 +52,7 @@ def create_app(test_config=None):
         repo.repo_instance = memory_repository.MemoryRepository()
         # fill the content of the repository from the provided csv files (has to be done every time we start app!)
         database_mode = False
-        repository_populate.populate(data_path, repo.repo_instance, database_mode)
+        repository_populate.populate(alb, repo.repo_instance)
 
     elif app.config['REPOSITORY'] == 'database':
         # Configure database.
@@ -63,7 +72,7 @@ def create_app(test_config=None):
         # Create the database session factory using sessionmaker (this has to be done once, in a global manner)
         session_factory = sessionmaker(autocommit=False, autoflush=True, bind=database_engine)
         # Create the SQLAlchemy DatabaseRepository instance for an sqlite3-based repository.
-        repo.repo_instance = database_repository.SqlAlchemyRepository(session_factory)
+        repo.repo_instance = database_repository(session_factory)
 
         if app.config['TESTING'] == 'True' or len(database_engine.table_names()) == 0:
             print("REPOPULATING DATABASE...")
@@ -77,7 +86,7 @@ def create_app(test_config=None):
             map_model_to_tables()
 
             database_mode = True
-            repository_populate.populate(data_path, repo.repo_instance, database_mode)
+            repository_populate.populate(alb, repo.repo_instance)
             print("REPOPULATING DATABASE... FINISHED")
 
         else:

@@ -1,7 +1,8 @@
 import os
 import csv
 import ast
-
+from pathlib import Path
+from music.adapters.repository import AbstractRepository
 from music.domainmodel.artist import Artist
 from music.domainmodel.album import Album
 from music.domainmodel.track import Track
@@ -166,3 +167,11 @@ class TrackCSVReader:
             self.__dataset_of_tracks.append(track)
 
         return self.__dataset_of_tracks
+
+
+def load_tracks(alb, repo: AbstractRepository):
+    album = str(alb) + '/raw_albums_excerpt.csv'
+    track = str(alb) + "/raw_tracks_excerpt.csv"
+    file_reader = TrackCSVReader(album, track)
+    tracks = file_reader.read_csv_files()
+    repo.add_tracks(tracks)
