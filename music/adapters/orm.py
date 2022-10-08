@@ -4,7 +4,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import mapper, relationship, synonym
 
-from music.domainmodel import album, artist, genre, playlist, review, track, user
+from music.domainmodel import Album, Artist, Genre, Playlist, Review, Track, User
 
 # global variable giving access to the MetaData (schema) information of the database
 metadata = MetaData()
