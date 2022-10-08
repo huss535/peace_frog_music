@@ -65,10 +65,15 @@ def create_app(test_config=None):
         # leading to a URI of "sqlite:///music.db". 
         # Note that create_engine does not establish any actual DB connection directly!
         database_echo = app.config['SQLALCHEMY_ECHO']
+        if app.config['SQLALCHEMY_ECHO'] == 'False':
+            database_echo = False
+        else:
+            database_echo = True
+
         # Please do not change the settings for connect_args and poolclass!
+
         database_engine = create_engine(database_uri, connect_args={"check_same_thread": False}, poolclass=NullPool,
                                         echo=database_echo)
-
         # Create the database session factory using sessionmaker (this has to be done once, in a global manner)
         session_factory = sessionmaker(autocommit=False, autoflush=True, bind=database_engine)
         # Create the SQLAlchemy DatabaseRepository instance for an sqlite3-based repository.
