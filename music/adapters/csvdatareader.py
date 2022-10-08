@@ -174,9 +174,6 @@ def load_tracks(alb, repo: AbstractRepository):
     track = str(alb) + "/raw_tracks_excerpt.csv"
     file_reader = TrackCSVReader(album, track)
     tracks = file_reader.read_csv_files()
-    for track1 in tracks:
-        repo.add_tracks(track1)
-
     for genre in file_reader.dataset_of_genres:
         repo.add_genres(genre)
 
@@ -185,4 +182,9 @@ def load_tracks(alb, repo: AbstractRepository):
 
     for artist in file_reader.dataset_of_artists:
         repo.add_artists(artist)
+
+    for track1 in tracks:
+        repo.add_tracks(track1)
+
+
 

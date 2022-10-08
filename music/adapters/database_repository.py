@@ -48,6 +48,10 @@ class database_repository(AbstractRepository):
 
     def __init__(self, session_factory):
         self.tracks = []
+        self.first = 0
+        self.last = 0
+        self.prev_first = 0
+        self.prev_last = 0
         self._session_cm = SessionContextManager(session_factory)
 
     def close_session(self):
@@ -57,6 +61,7 @@ class database_repository(AbstractRepository):
         self._session_cm.reset_session()
 
     def add_tracks(self, track: Track):
+        self.track.append(track)
         with self._session_cm as scm:
             scm.session.add(track)
             scm.commit()
