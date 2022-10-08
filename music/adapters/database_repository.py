@@ -47,6 +47,7 @@ class SessionContextManager:
 class database_repository(AbstractRepository):
 
     def __init__(self, session_factory):
+        self.tracks = []
         self._session_cm = SessionContextManager(session_factory)
 
     def close_session(self):
