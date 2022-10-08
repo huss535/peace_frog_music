@@ -2,6 +2,13 @@ import os
 import csv
 import ast
 from pathlib import Path
+
+from flask import app
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import NullPool
+
+from music.adapters.database_repository import database_repository
 from music.adapters.repository import AbstractRepository
 from music.domainmodel.artist import Artist
 from music.domainmodel.album import Album
@@ -188,3 +195,28 @@ def load_tracks(alb, repo: AbstractRepository):
 
 
 
+
+
+database_uri = 'sqlite:///music.db'
+
+        # CHECK NAME FOR MUSIC.DB
+
+        # We create a comparatively simple SQLite database, which is based on a single file (see .env for URI).
+        # For example the file database could be located locally and relative to the application in music.db,
+        # leading to a URI of "sqlite:///music.db".
+        # Note that create_engine does not establish any actual DB connection directly!
+
+database_echo = False
+
+database_engine = create_engine(database_uri, connect_args={"check_same_thread": False}, poolclass=NullPool,
+                                echo=database_echo)
+# Create the database session factory using sessionmaker (this has to be done once, in a global manner)
+session_factory = sessionmaker(autocommit=False, autoflush=True, bind=database_engine)
+album = str(os.path.abspath('data/raw_albums_excerpt.csv'))
+track = str(os.path.abspath("data/raw_tracks_excerpt.csv"))
+file_reader = TrackCSVReader(album, track)
+file_reader.read_csv_files()
+repo = database_repository(session_factory)
+for item in file_reader.dataset_of_genres:
+    print(item)
+    repo.add_genres(item)
