@@ -84,9 +84,8 @@ def map_model_to_tables():
         '_Track__track_id': tracks_table.c.track_id,
         '_Track__track_url': tracks_table.c.track_url,
         '_Track__track_duration': tracks_table.c.track_duration,
-        '_Track__album': relationship(artist, backref="_artist__artist_id"),
-        '_Track__artist': relationship(artist, backref="_artist__artist_id"),
-        '_Track__genres': relationship(artist, backref="_artist__artist_id")
-
+        '_Track__album': relationship(Album, backref="_Album__title"),
+        '_Track__artist': relationship(Artist, backref="_Artist__full_name"),
+        '_Track__genres': relationship(Genre, backref="_Genre__name")
 
     })
