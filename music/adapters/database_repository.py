@@ -7,8 +7,11 @@ from sqlalchemy import desc, asc
 
 from sqlalchemy.orm import scoped_session
 
+from music.domainmodel.track import Track
 from music.adapters.repository import AbstractRepository
-from music.domainmodel import Track, Album, Genre, Artist
+from music.domainmodel.album import Album
+from music.domainmodel.artist import Artist
+from music.domainmodel.genre import Genre
 
 
 class SessionContextManager:
@@ -71,6 +74,17 @@ class database_repository(AbstractRepository):
         with self._session_cm as scm:
             scm.session.add(artist)
             scm.commit()
+
+
+
+
+
+
+
+
+
+
+
 
     def get_tracks_album(self, album_name) -> List[Track]:
         if album_name is None:

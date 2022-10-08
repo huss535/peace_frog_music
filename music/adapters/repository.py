@@ -1,5 +1,9 @@
 import abc
 
+from music.domainmodel.album import Album
+from music.domainmodel.artist import Artist
+from music.domainmodel.genre import Genre
+
 repo_instance = None
 
 
@@ -12,6 +16,18 @@ class RepositoryException(Exception):
 class AbstractRepository(abc.ABC):
     @abc.abstractmethod
     def add_tracks(self, alb):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def add_albums(self, album: Album):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def add_genres(self, genre: Genre):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def add_artists(self, artist: Artist):
         raise NotImplementedError
 
    # @abc.abstractmethod

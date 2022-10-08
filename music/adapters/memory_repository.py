@@ -1,4 +1,7 @@
 from music.adapters.repository import AbstractRepository
+from music.domainmodel.album import Album
+from music.domainmodel.artist import Artist
+from music.domainmodel.genre import Genre
 
 
 class MemoryRepository(AbstractRepository):
@@ -12,6 +15,15 @@ class MemoryRepository(AbstractRepository):
         self.prev_last = 0
         self.first = 0
         self.last = 0
+
+    def add_albums(self, album: Album):
+        pass
+
+    def add_genres(self, genre: Genre):
+        pass
+
+    def add_artists(self, artist: Artist):
+        pass
 
     def add_tracks(self, track):
         self.tracks.append(track)
