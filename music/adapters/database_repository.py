@@ -52,9 +52,24 @@ class database_repository(AbstractRepository):
     def reset_session(self):
         self._session_cm.reset_session()
 
-    def add_tracks(self, track):
+    def add_tracks(self, track: Track):
         with self._session_cm as scm:
             scm.session.add(track)
+            scm.commit()
+
+    def add_albums(self, album: Album):
+        with self._session_cm as scm:
+            scm.session.add(album)
+            scm.commit()
+
+    def add_genres(self, genre: Genre):
+        with self._session_cm as scm:
+            scm.session.add(genre)
+            scm.commit()
+
+    def add_artists(self, artist: Artist):
+        with self._session_cm as scm:
+            scm.session.add(artist)
             scm.commit()
 
     def get_tracks_album(self, album_name) -> List[Track]:
