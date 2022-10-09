@@ -187,14 +187,15 @@ def load_tracks(alb, repo: AbstractRepository):
 
     for genre in file_reader.dataset_of_genres:
         repo.add_genres(genre)
-
-    for track1 in tracks:
-        repo.add_tracks(track1)
-
     for album in file_reader.dataset_of_albums:
         repo.add_albums(album)
 
     for artist in file_reader.dataset_of_artists:
         repo.add_artists(artist)
+
+    for track1 in tracks:
+        repo.add_tracks(track1)
+
+
 
 

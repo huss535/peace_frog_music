@@ -12,10 +12,10 @@ from music.domainmodel.artist import Artist
 from music.domainmodel.genre import Genre
 
 metadata = MetaData()
-
+# , autoincrement=True
 albums_table = Table(
     'albums', metadata,
-    Column('id', Integer, primary_key=True, autoincrement=True),
+    Column('id', Integer, primary_key=True),
 
     Column('title', String(255)),
     Column('album_url', String(255)),
@@ -25,7 +25,7 @@ albums_table = Table(
 
 artists_table = Table(
     'artists', metadata,
-    Column('id', Integer, primary_key=True, autoincrement=True, unique=True),
+    Column('id', Integer, primary_key=True),
 
     Column('full_name', String(1024))
 
@@ -57,7 +57,7 @@ users_table = Table(
     'users', metadata,
     Column('id', Integer, primary_key=True, autoincrement=True),
 
-    Column('user_name', String(1024), unique=True),
+    Column('user_name', String(1024)),
     Column('password', String(1024))
 )
 genres_tracks_table = Table(
@@ -79,8 +79,9 @@ def map_model_to_tables():
     })
 
     mapper(Artist, artists_table, properties={
-        '_Artist__full_name': artists_table.c.full_name,
         '_Artist__artist_id': artists_table.c.id,
+        '_Artist__full_name': artists_table.c.full_name,
+
 
     })
 
