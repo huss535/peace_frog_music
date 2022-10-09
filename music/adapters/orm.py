@@ -25,7 +25,7 @@ albums_table = Table(
 
 artists_table = Table(
     'artists', metadata,
-    Column('id', Integer, primary_key=True, autoincrement=True),
+    Column('id', Integer, primary_key=True, autoincrement=True, unique=True),
 
     Column('full_name', String(1024))
 
