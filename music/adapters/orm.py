@@ -71,7 +71,7 @@ genres_tracks_table = Table(
 def map_model_to_tables():
     mapper(Album, albums_table, properties={
         '_Album__title': albums_table.c.title,
-        '_Album__album_id': albums_table.c.id,
+        #'_Album__album_id': albums_table.c.id,
         '_Album__album_url': albums_table.c.album_url,
         '_Album__album_type': albums_table.c.album_type,
         '_Album__release_year': albums_table.c.release_year
@@ -98,7 +98,7 @@ def map_model_to_tables():
 
     mapper(Track, tracks_table, properties={
         '_Track__title': tracks_table.c.title,
-        '_Track__track_id': tracks_table.c.id,
+        #'_Track__track_id': tracks_table.c.id,
         '_Track__track_url': tracks_table.c.track_url,
         '_Track__track_duration': tracks_table.c.track_duration,
         '_Track__album': relationship(Album, backref="_Track__album_id"),
