@@ -28,6 +28,10 @@ class MemoryRepository(AbstractRepository):
     def add_tracks(self, track):
         self.tracks.append(track)
 
+    def get_tracks(self):
+
+        return self.tracks
+
     def get_tracks_album(self, album_name):
         tracks = []
         for song in self.tracks:

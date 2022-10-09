@@ -39,10 +39,9 @@ def create_app(test_config=None):
         app.config.from_mapping(test_config)
         data_path = app.config['TEST_DATA_PATH']
 
-    #repo.repo_instance = MemoryRepository()
+    # repo.repo_instance = MemoryRepository()
 
-    #populate(alb, repo.repo_instance)
-
+    # populate(alb, repo.repo_instance)
 
     # Here the "magic" of our repository pattern happens. We can easily switch between in memory data and
     # persistent database data storage for our application.
@@ -97,20 +96,13 @@ def create_app(test_config=None):
         else:
             # Solely generate mappings that map domain model classes to the database tables.
             map_model_to_tables()
-            repository_populate.populate(alb, repo.repo_instance)
 
 
-
-    # @app.route('/')
-    # def home():
-    # some_track = create_some_track()
-    # # Use Jinja to customize a predefined html page rendering the layout for showing a single track.
-    # return render_template('header.html')
     with app.app_context():
         # Register blueprints.
         from .home import home
         app.register_blueprint(home.home_blueprint)
-        
+
         from .trackList import trackList
         app.register_blueprint(trackList.track_blueprint)
 
@@ -119,7 +111,7 @@ def create_app(test_config=None):
 
         from music.albums.albums import handle_data
         app.register_blueprint(albums.albums_blueprint)
-        
+
         from music.artists.artists import handle_data
         app.register_blueprint(artists.artists_blueprint)
 

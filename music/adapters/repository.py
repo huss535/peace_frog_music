@@ -30,14 +30,29 @@ class AbstractRepository(abc.ABC):
     def add_artists(self, artist: Artist):
         raise NotImplementedError
 
-   # @abc.abstractmethod
-   # def get_tracks_album(self, album_name):
-       # raise NotImplementedError
+    @abc.abstractmethod
+    def get_tracks(self):
+        raise NotImplementedError
 
-   # @abc.abstractmethod
-   # def get_tracks_genre(self, album_name):
-       # raise NotImplementedError
+    @abc.abstractmethod
+    def get_tracks_album(self,album_name):
+        raise NotImplementedError
 
-   # @abc.abstractmethod
-  #  def get_tracks_artist(self, album_name):
-      #  raise NotImplementedError
+    @abc.abstractmethod
+    def get_tracks_genre(self,genre_name):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_tracks_artist(self, artist_name):
+        raise NotImplementedError
+# @abc.abstractmethod
+# def get_tracks_album(self, album_name):
+# raise NotImplementedError
+
+# @abc.abstractmethod
+# def get_tracks_genre(self, album_name):
+# raise NotImplementedError
+
+# @abc.abstractmethod
+#  def get_tracks_artist(self, album_name):
+#  raise NotImplementedError

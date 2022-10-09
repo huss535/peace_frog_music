@@ -81,35 +81,37 @@ class database_repository(AbstractRepository):
             scm.session.add(artist)
             scm.commit()
 
+    def get_tracks(self):
+        self.tracks = self._session_cm.session.query(Track).all()
+        return self.tracks
+
     def get_tracks_album(self, album_name) -> List[Track]:
         if album_name is None:
-            self.tracks = self._session_cm.session.query(Track).all()
+            tracks = self._session_cm.session.query(Track).all()
         else:
             # Return Tracks matching album_name; return an empty list if there are no matches.
             # Track.__album should return album object associated with the Track
             # Track.__album.__title returns the title of the associated album
-            self.tracks = self._session_cm.session.query(Track).filter(Track.__album.__title == album_name).all()
-        return self.tracks, album_name
+            tracks = self._session_cm.session.query(Track).filter(Track.__album.__title == album_name).all()
+        return tracks, album_name
 
     def get_tracks_artist(self, artist_name):
         if artist_name is None:
-            self.tracks = self._session_cm.session.query(Track).all()
+            tracks = self._session_cm.session.query(Track).all()
         else:
             # Return Tracks matching artist_name; return an empty list if there are no matches.
             # Track.__artist should return artist object associated with the Track
             # Track.__artist.__full_name should return the artist name
-            self.tracks = self._session_cm.session.query(Track).filter(Track.__artist.__full_name == artist_name).all()
-        return self.tracks, artist_name
+            tracks = self._session_cm.session.query(Track).filter(Track.__artist.__full_name == artist_name).all()
+        return tracks, artist_name
 
     # BANDAID SOLUTION, USING METHOD RAXXED FROM MEMORY REPO, MAY CHANGE IF HAVE TIME
     def get_tracks_genre(self, genre_name: str):
-        self.tracks = []
+        tracks = []
         all_tracks = self._session_cm.session.query(Track).all()
         for song in all_tracks:
             if len(song.genres) != 0:
                 for genre in song.genres:
                     if genre.name == genre_name:
-                        self.tracks.append(song)
-        return self.tracks, genre_name
-
-
+                        tracks.append(song)
+        return tracks, genre_name
