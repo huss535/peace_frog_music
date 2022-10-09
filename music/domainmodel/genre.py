@@ -10,7 +10,7 @@ class Genre:
         else:
             self.__name = None
 
-        self.tracks = []
+        self.__tracks = []
 
     @property
     def genre_id(self) -> int:
@@ -19,6 +19,10 @@ class Genre:
     @property
     def name(self) -> str:
         return self.__name
+
+    @property
+    def tracks(self):
+        return self.__tracks
 
     @name.setter
     def name(self, name: str):

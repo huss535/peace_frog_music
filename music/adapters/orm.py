@@ -35,7 +35,9 @@ genres_table = Table(
     'genres', metadata,
     Column('id', Integer, primary_key=True, autoincrement=True),
     Column('genre_id', Integer, unique=True, nullable=False),
-    Column('name', String(1024), unique=True, nullable=False)
+    Column('name', String(1024), unique=True, nullable=False),
+    Column('tracks', String(1024), unique=True, nullable=False)
+
 )
 
 tracks_table = Table(
@@ -85,6 +87,7 @@ def map_model_to_tables():
     mapper(Genre, genres_table, properties={
         '_Genre__genre_id': genres_table.c.genre_id,
         '_Genre__name': genres_table.c.name,
+        '_Genre__tracks': genres_table.c.tracks
 
     })
 
@@ -95,7 +98,6 @@ def map_model_to_tables():
         '_Track__track_duration': tracks_table.c.track_duration,
         '_Track__album': relationship(Album, backref="_Track__album_id"),
         '_Track__artist': relationship(Artist, backref="_Track__artist_id"),
-        '_Track__genres': relationship(Genre, backref="_Track__genre_id"),
         '_Track__genres': relationship(Genre, secondary=genres_tracks_table,
                                        back_populates='_Genre__tracks')
     })
