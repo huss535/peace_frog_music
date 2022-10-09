@@ -172,7 +172,10 @@ class TrackCSVReader:
                     self.__dataset_of_genres.add(genre)
 
             self.__dataset_of_tracks.append(track)
-
+        for genre in self.dataset_of_genres:
+            for track in self.dataset_of_tracks:
+                if genre in track.genres:
+                    genre.tracks.append(track)
         return self.__dataset_of_tracks
 
 
@@ -181,6 +184,7 @@ def load_tracks(alb, repo: AbstractRepository):
     track = str(alb) + "/raw_tracks_excerpt.csv"
     file_reader = TrackCSVReader(album, track)
     tracks = file_reader.read_csv_files()
+
     for genre in file_reader.dataset_of_genres:
         repo.add_genres(genre)
 
@@ -192,31 +196,3 @@ def load_tracks(alb, repo: AbstractRepository):
 
     for track1 in tracks:
         repo.add_tracks(track1)
-
-
-
-
-
-database_uri = 'sqlite:///music.db'
-
-        # CHECK NAME FOR MUSIC.DB
-
-        # We create a comparatively simple SQLite database, which is based on a single file (see .env for URI).
-        # For example the file database could be located locally and relative to the application in music.db,
-        # leading to a URI of "sqlite:///music.db".
-        # Note that create_engine does not establish any actual DB connection directly!
-
-database_echo = False
-
-database_engine = create_engine(database_uri, connect_args={"check_same_thread": False}, poolclass=NullPool,
-                                echo=database_echo)
-# Create the database session factory using sessionmaker (this has to be done once, in a global manner)
-session_factory = sessionmaker(autocommit=False, autoflush=True, bind=database_engine)
-album = str(os.path.abspath('data/raw_albums_excerpt.csv'))
-track = str(os.path.abspath("data/raw_tracks_excerpt.csv"))
-file_reader = TrackCSVReader(album, track)
-file_reader.read_csv_files()
-repo = database_repository(session_factory)
-for item in file_reader.dataset_of_genres:
-    print(item)
-    repo.add_genres(item)

@@ -96,8 +96,9 @@ def create_app(test_config=None):
 
         else:
             # Solely generate mappings that map domain model classes to the database tables.
-            repository_populate.populate(alb, repo.repo_instance)
             map_model_to_tables()
+            repository_populate.populate(alb, repo.repo_instance)
+
 
 
     # @app.route('/')

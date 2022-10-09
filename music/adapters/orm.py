@@ -43,6 +43,9 @@ tracks_table = Table(
     Column('id', Integer, primary_key=True, autoincrement=True),
     Column('track_id', Integer, unique=True, nullable=False),
     Column('artists_id', ForeignKey('artists.artist_id')),
+    Column('albums_id', ForeignKey('albums.album_id')),
+    Column('genres_id', ForeignKey('genres.genre_id')),
+
     Column('title', String(255), nullable=False),
     Column('track_url', String(255), nullable=False),
     Column('track_duration', Integer, nullable=False)
@@ -54,6 +57,12 @@ users_table = Table(
     Column('user_id', Integer, unique=True, nullable=False),
     Column('user_name', String(1024), unique=True, nullable=False),
     Column('password', String(1024), nullable=False)
+)
+article_tags_table = Table(
+    'genres_tracks', metadata,
+    Column('id', Integer, primary_key=True, autoincrement=True),
+    Column('track_id', ForeignKey('tracks.id')),
+    Column('genre_id', ForeignKey('genres.id'))
 )
 
 
@@ -84,8 +93,8 @@ def map_model_to_tables():
         '_Track__track_id': tracks_table.c.track_id,
         '_Track__track_url': tracks_table.c.track_url,
         '_Track__track_duration': tracks_table.c.track_duration,
-        '_Track__album': relationship(Album, backref="_Album__title"),
-        '_Track__artist': relationship(Artist, backref="_Artist__full_name"),
-        '_Track__genres': relationship(Genre, backref="_Genre__name")
+        '_Track__album': relationship(Album, backref="_Track__album_id"),
+        '_Track__artist': relationship(Artist, backref="_Track__artist_id"),
+        '_Track__genres': relationship(Genre, backref="_Track__genre_id")
 
     })
