@@ -39,9 +39,9 @@ def create_app(test_config=None):
         app.config.from_mapping(test_config)
         data_path = app.config['TEST_DATA_PATH']
 
-    repo.repo_instance = MemoryRepository()
+    #repo.repo_instance = MemoryRepository()
 
-    populate(alb, repo.repo_instance)
+    #populate(alb, repo.repo_instance)
 
 
     # Here the "magic" of our repository pattern happens. We can easily switch between in memory data and
