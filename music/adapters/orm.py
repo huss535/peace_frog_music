@@ -58,7 +58,7 @@ users_table = Table(
     Column('user_name', String(1024), unique=True, nullable=False),
     Column('password', String(1024), nullable=False)
 )
-article_tags_table = Table(
+genres_tracks_table = Table(
     'genres_tracks', metadata,
     Column('id', Integer, primary_key=True, autoincrement=True),
     Column('track_id', ForeignKey('tracks.id')),
@@ -95,6 +95,7 @@ def map_model_to_tables():
         '_Track__track_duration': tracks_table.c.track_duration,
         '_Track__album': relationship(Album, backref="_Track__album_id"),
         '_Track__artist': relationship(Artist, backref="_Track__artist_id"),
-        '_Track__genres': relationship(Genre, backref="_Track__genre_id")
-
+        '_Track__genres': relationship(Genre, backref="_Track__genre_id"),
+        '_Track__genres': relationship(Genre, secondary=genres_tracks_table,
+                                       back_populates='_Genre__tracks')
     })
