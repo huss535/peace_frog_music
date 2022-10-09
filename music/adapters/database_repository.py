@@ -61,7 +61,7 @@ class database_repository(AbstractRepository):
         self._session_cm.reset_session()
 
     def add_tracks(self, track: Track):
-        self.track.append(track)
+        self.tracks.append(track)
         with self._session_cm as scm:
             scm.session.add(track)
             scm.commit()

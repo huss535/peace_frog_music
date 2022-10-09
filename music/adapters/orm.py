@@ -15,7 +15,7 @@ metadata = MetaData()
 # , autoincrement=True
 albums_table = Table(
     'albums', metadata,
-    Column('id', Integer, primary_key=True),
+    Column('id', Integer, primary_key=True, autoincrement=True),
 
     Column('title', String(255)),
     Column('album_url', String(255)),
@@ -25,7 +25,7 @@ albums_table = Table(
 
 artists_table = Table(
     'artists', metadata,
-    Column('id', Integer, primary_key=True),
+    Column('id', Integer, primary_key=True, autoincrement=True),
 
     Column('full_name', String(1024))
 
@@ -79,14 +79,14 @@ def map_model_to_tables():
     })
 
     mapper(Artist, artists_table, properties={
-        '_Artist__artist_id': artists_table.c.id,
+        #'_Artist__artist_id': artists_table.c.id,
         '_Artist__full_name': artists_table.c.full_name,
 
 
     })
 
     mapper(Genre, genres_table, properties={
-        '_Genre__genre_id': genres_table.c.id,
+        #'_Genre__genre_id': genres_table.c.id,
         '_Genre__name': genres_table.c.name,
         '_Genre__tracks':  relationship(
             Track,

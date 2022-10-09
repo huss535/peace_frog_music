@@ -191,6 +191,7 @@ def load_tracks(alb, repo: AbstractRepository):
         repo.add_albums(album)
 
     for artist in file_reader.dataset_of_artists:
+
         repo.add_artists(artist)
 
     for track1 in tracks:
