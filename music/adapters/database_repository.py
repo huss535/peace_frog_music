@@ -99,10 +99,11 @@ class database_repository(AbstractRepository):
         if artist_name is None:
             tracks = self._session_cm.session.query(Track).all()
         else:
-            # Return Tracks matching artist_name; return an empty list if there are no matches.
-            # Track.__artist should return artist object associated with the Track
-            # Track.__artist.__full_name should return the artist name
-            tracks = self._session_cm.session.query(Track).filter(Track.__artist.__full_name == artist_name).all()
+            tracks = self.get_tracks()
+            for i in range(len(tracks) -1 ,-1, -1):
+                if tracks[i].artist.full_name != artist_name:
+                    tracks.pop(i)
+            #tracks = self._session_cm.session.query(Track).filter(Track.__artist.__full_name == artist_name).all()
         return tracks, artist_name
 
     # BANDAID SOLUTION, USING METHOD RAXXED FROM MEMORY REPO, MAY CHANGE IF HAVE TIME
