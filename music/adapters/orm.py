@@ -5,6 +5,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import mapper, relationship, synonym
 
 # global variable giving access to the MetaData (schema) information of the database
+from music.domainmodel.review import Review
 from music.domainmodel.track import Track
 from music.domainmodel import track, artist, album
 from music.domainmodel.album import Album
@@ -21,6 +22,15 @@ albums_table = Table(
     Column('album_url', String(255)),
     Column('album_type', String(255)),
     Column('release_year', Integer)
+)
+
+reviews_table = Table(
+    'reviews', metadata,
+    Column('id', Integer, primary_key=True, autoincrement=True),
+
+    Column('review_text', String(1024)),
+    Column('review_track', String(1024))
+
 )
 
 artists_table = Table(
@@ -69,9 +79,15 @@ genres_tracks_table = Table(
 
 
 def map_model_to_tables():
+    mapper(Review, reviews_table, properties={
+
+        '_Review__review_text': reviews_table.c.review_text,
+        '_Review__track': reviews_table.c.review_track
+
+    })
     mapper(Album, albums_table, properties={
         '_Album__title': albums_table.c.title,
-        #'_Album__album_id': albums_table.c.id,
+        # '_Album__album_id': albums_table.c.id,
         '_Album__album_url': albums_table.c.album_url,
         '_Album__album_type': albums_table.c.album_type,
         '_Album__release_year': albums_table.c.release_year
@@ -79,16 +95,15 @@ def map_model_to_tables():
     })
 
     mapper(Artist, artists_table, properties={
-        #'_Artist__artist_id': artists_table.c.id,
+        # '_Artist__artist_id': artists_table.c.id,
         '_Artist__full_name': artists_table.c.full_name,
-
 
     })
 
     mapper(Genre, genres_table, properties={
-        #'_Genre__genre_id': genres_table.c.id,
+        # '_Genre__genre_id': genres_table.c.id,
         '_Genre__name': genres_table.c.name,
-        '_Genre__tracks':  relationship(
+        '_Genre__tracks': relationship(
             Track,
             secondary=genres_tracks_table,
             back_populates="_Track__genres"
@@ -98,7 +113,7 @@ def map_model_to_tables():
 
     mapper(Track, tracks_table, properties={
         '_Track__title': tracks_table.c.title,
-        #'_Track__track_id': tracks_table.c.id,
+        # '_Track__track_id': tracks_table.c.id,
         '_Track__track_url': tracks_table.c.track_url,
         '_Track__track_duration': tracks_table.c.track_duration,
         '_Track__album': relationship(Album, backref="_Track__album_id"),

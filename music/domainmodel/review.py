@@ -4,17 +4,16 @@ from music.domainmodel.track import Track
 
 class Review:
 
-    def __init__(self, track: Track, review_text: str, rating: int):
-        self.__track = None
-        if isinstance(track, Track):
-            self.__track = track
+    def __init__(self, track, review_text: str):
+        self.__track = "track"
+        if isinstance(review_text, str):
+            self.__review_text = review_text.strip()
 
         self.__review_text = 'N/A'
         if isinstance(review_text, str):
             self.__review_text = review_text.strip()
 
-        if isinstance(rating, int) and 1 <= rating <= 5:
-            self.__rating = rating
+
         else:
             raise ValueError('Invalid value for the rating.')
 
