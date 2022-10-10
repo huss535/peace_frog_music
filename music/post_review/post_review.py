@@ -7,7 +7,7 @@ post_reviews_blueprint = Blueprint(
     'post_reviews_bp', __name__)
 
 
-@post_reviews_blueprint.route('/post_review', methods=['GET', 'POST'])
+@post_reviews_blueprint.route('/post_review', methods=['POST'])
 def handle_data():
     track_name = request.form['track_name']
     review_text = request.form['review_text']
@@ -17,8 +17,8 @@ def handle_data():
     return render_template("meat/review_confirmation.html")
 
 
-@post_reviews_blueprint.route('/searchpost_review', methods=['GET', 'POST'])
+@post_reviews_blueprint.route('/post_review', methods=['GET', 'POST'])
 def form_page():
-    return render_template('meat/search_post_reviews.html')
+    return render_template('meat/post_review.html')
 
 
