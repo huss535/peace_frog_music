@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main id="main">
+    <header id="search-header">
+        <h1>Post A review by Track Name</h1>
+    </header>
+
+    <div class = 'form1'>
+        <form  action="{{ url_for('albums_bp.handle_data') }}" method="post">
+            <h2>Track Name</h2>
+            <input  type="text" name="track_name">
+            <h2>Your Review</h2>
+            <input  type="text" name="review_text">
+            <input type="submit">
+        </form>
+    </div>
+</main>
+{% endblock %}
