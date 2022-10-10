@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main id="main">
+    <header id="search-header">
+        <h1>Search Review by Track Name</h1>
+    </header>
+
+    <div class = 'form1'>
+        <form  action="{{ url_for('reviews_bp.handle_data') }}" method="post">
+            <input  type="text" name="projectFilepath">
+            <input type="submit">
+        </form>
+    </div>
+</main>
+{% endblock %}
