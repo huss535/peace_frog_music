@@ -7,6 +7,7 @@ from sqlalchemy import desc, asc
 
 from sqlalchemy.orm import scoped_session
 
+from music.domainmodel.review import Review
 from music.domainmodel.track import Track
 from music.adapters.repository import AbstractRepository
 from music.domainmodel.album import Album
@@ -80,6 +81,20 @@ class database_repository(AbstractRepository):
         with self._session_cm as scm:
             scm.session.add(artist)
             scm.commit()
+
+    def add_reviews(self, review: Review):
+        with self._session_cm as scm:
+            scm.session.add(review)
+            scm.commit()
+
+    def get_reviews(self):
+        self.reviews = self._session_cm.session.query(Review).all()
+        return self.reviews
+
+    def get_review(self, track_name):
+        reviews = []
+        reviews = self._session_cm.session.query(Review).filter(Review._Review__track == track_name).all()
+        return reviews
 
     def get_tracks(self):
         self.tracks = self._session_cm.session.query(Track).all()
