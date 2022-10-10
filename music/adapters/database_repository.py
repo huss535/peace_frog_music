@@ -82,7 +82,7 @@ class database_repository(AbstractRepository):
             scm.session.add(artist)
             scm.commit()
 
-    def add_reviews(self, review: Review):
+    def add_reviews(self, review):
         with self._session_cm as scm:
             scm.session.add(review)
             scm.commit()
