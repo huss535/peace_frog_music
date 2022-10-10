@@ -45,6 +45,18 @@ class AbstractRepository(abc.ABC):
     @abc.abstractmethod
     def get_tracks_artist(self, artist_name):
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def add_reviews(self, review):
+        raise NotImplementedError
+
+        # def get_reviews(self):
+        # self.reviews = self._session_cm.session.query(Review).all()
+        # return self.reviews
+
+    @abc.abstractmethod
+    def get_reviews(self, track_name):
+        raise NotImplementedError
 # @abc.abstractmethod
 # def get_tracks_album(self, album_name):
 # raise NotImplementedError

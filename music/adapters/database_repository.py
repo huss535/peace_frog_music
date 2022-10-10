@@ -87,11 +87,11 @@ class database_repository(AbstractRepository):
             scm.session.add(review)
             scm.commit()
 
-    def get_reviews(self):
-        self.reviews = self._session_cm.session.query(Review).all()
-        return self.reviews
+    #def get_reviews(self):
+       # self.reviews = self._session_cm.session.query(Review).all()
+       # return self.reviews
 
-    def get_review(self, track_name):
+    def get_reviews(self, track_name):
         reviews = []
         reviews = self._session_cm.session.query(Review).filter(Review._Review__track == track_name).all()
         return reviews

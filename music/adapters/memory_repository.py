@@ -32,6 +32,16 @@ class MemoryRepository(AbstractRepository):
 
         return self.tracks
 
+    def add_reviews(self, review):
+        pass
+
+        # def get_reviews(self):
+        # self.reviews = self._session_cm.session.query(Review).all()
+        # return self.reviews
+
+    def get_reviews(self, track_name):
+        pass
+
     def get_tracks_album(self, album_name):
         tracks = []
         for song in self.tracks:
