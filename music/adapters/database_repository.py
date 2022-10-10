@@ -94,7 +94,7 @@ class database_repository(AbstractRepository):
     def get_reviews(self, track_name):
         reviews = []
         reviews = self._session_cm.session.query(Review).filter(Review._Review__track == track_name).all()
-        return reviews
+        return reviews, track_name
 
     def get_tracks(self):
         self.tracks = self._session_cm.session.query(Track).all()
