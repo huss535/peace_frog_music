@@ -92,7 +92,7 @@ class database_repository(AbstractRepository):
         else:
             tracks = self.get_tracks()
             for i in range(len(tracks) - 1, -1, -1):
-                if tracks[i].album.title != album_name:
+                if tracks[i].album == None or tracks[i].album.title != album_name:
                     tracks.pop(i)
             #tracks = self._session_cm.session.query(Track).filter(Track.__album.__title == album_name).all()
         return tracks, album_name
