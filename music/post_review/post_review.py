@@ -14,7 +14,7 @@ def handle_data():
     new_review = Review(track_name, review_text)
     services.add_new_review(new_review)
     # TODO confirmation/failure to post page
-    return render_template("meat/post_review.html", track_list=tracks[0],post_review_name =tracks[1] )
+    return render_template("meat/review_confirmation.html")
 
 
 @post_reviews_blueprint.route('/searchpost_review', methods=['GET', 'POST'])

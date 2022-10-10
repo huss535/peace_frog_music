@@ -117,6 +117,9 @@ def create_app(test_config=None):
         from .authentication import authentication
         app.register_blueprint(authentication.authentication_blueprint)
 
+        from music.post_review import post_review
+        app.register_blueprint(post_review.post_reviews_blueprint)
+
         from .reviews import reviews
         app.register_blueprint(reviews.reviews_blueprint)
         # Register a callback the makes sure that database sessions are associated with http requests
