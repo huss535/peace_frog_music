@@ -25,10 +25,7 @@
             {% endfor %}
             </p>
             <p>Artist: {{ track.artist.full_name }}</p>
-            <p>Album: {{ track.album.title }}</p>
-            <div style="float:right">
-                <button class="btn-general" onclick="location.href='{{ review.add_comment_url }}'">Reviews</button>
-            </div>
+        <p>Album: {{ track.album.title }}</p>
             <br>
         {% endfor %}
         {% endif %}

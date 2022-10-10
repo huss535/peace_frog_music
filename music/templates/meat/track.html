@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main id="main">
+    <header id="track-header">
+        <h1>{{ track.title }}</h1>
+    </header>
+
+
+    <body>
+        <h1>CompSci 235 2022 - MY MUSIC LIBRARY</h1>
+        <h2>{{ track.title }}</h2>
+        <p>Track Duration: <b>{{ track.track_duration }}</b></p>
+        <p>Track URL: {{ track.track_url }}</p>
+        <p>Genres: {{ track.genres }}</p>
+        <p>Artist: {{ track.artist }}</p>
+        <p>Album: {{ track.album }}</p>
+        <!-- Maybe be able to click on Artist and Album -->
+    </body>
+
+</main>
+{% endblock %}

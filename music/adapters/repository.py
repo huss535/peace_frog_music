@@ -3,7 +3,6 @@ import abc
 from music.domainmodel.album import Album
 from music.domainmodel.artist import Artist
 from music.domainmodel.genre import Genre
-from music.domainmodel.review import Review
 
 repo_instance = None
 
@@ -46,29 +45,6 @@ class AbstractRepository(abc.ABC):
     @abc.abstractmethod
     def get_tracks_artist(self, artist_name):
         raise NotImplementedError
-
-# NEW ABSTRACT METHODS FOR REVIEW
-
-    @abc.abstractmethod
-    def get_track(self, track_id: int):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def add_review(self, review: Review):
-        """ Adds a review to the repository.
-
-        We care little for so called 'bidrectional links' between Tracks and Users.
-        A great review can come from an instant spark of creativity, something which may be hindered when
-        a user is smacked with an error calling for registration.
-        """
-        if review.track is None or review not in review.track.reviews:
-            raise RepositoryException('Review not correctly attached to a Track')
-
-    @abc.abstractmethod
-    def get_reviews(self):
-        """ Returns the reviews stored in the repository. """
-        raise NotImplementedError
-
 # @abc.abstractmethod
 # def get_tracks_album(self, album_name):
 # raise NotImplementedError

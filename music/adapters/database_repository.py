@@ -12,7 +12,6 @@ from music.adapters.repository import AbstractRepository
 from music.domainmodel.album import Album
 from music.domainmodel.artist import Artist
 from music.domainmodel.genre import Genre
-from music.domainmodel.review import Review
 
 
 class SessionContextManager:
@@ -82,13 +81,6 @@ class database_repository(AbstractRepository):
             scm.session.add(artist)
             scm.commit()
 
-    def get_track(self, track_id: int):
-        self.tracks = self._session_cm.session.query(Track).all()
-        for track in self.tracks:
-            if track.id == track_id:
-                return track
-        return None
-
     def get_tracks(self):
         self.tracks = self._session_cm.session.query(Track).all()
         return self.tracks
@@ -126,15 +118,3 @@ class database_repository(AbstractRepository):
                     if genre.name == genre_name:
                         tracks.append(song)
         return tracks, genre_name
-
-    # Get list of reviews
-    def get_reviews(self) -> List[Review]:
-        reviews = self._session_cm.session.query(Review).all()
-        return reviews
-
-    # Append a review
-    def add_review(self, review: Review):
-        super().add_review(review)
-        with self._session_cm as scm:
-            scm.session.add(review)
-            scm.commit()
