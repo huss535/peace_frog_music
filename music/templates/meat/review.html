@@ -4,12 +4,11 @@
 
 <main id="main">
     <header id="track-header">
-        <h1>Tracks by Artist</h1>
+        <h1>{{ track_name }}</h1>
         <!-- Maybe put page number here? -->
     </header>
 
     <body>
-        <h1>{{ track_name }}</h1>
         {% if review_list|length == 0 %}
             <h2>No Reviews were found!</h2>
             <p>Be the first to add a review!</p>
