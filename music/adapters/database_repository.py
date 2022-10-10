@@ -86,13 +86,15 @@ class database_repository(AbstractRepository):
         return self.tracks
 
     def get_tracks_album(self, album_name) -> List[Track]:
-        if album_name is None:
+        if album_name is None or album_name == "":
             tracks = self._session_cm.session.query(Track).all()
+
         else:
-            # Return Tracks matching album_name; return an empty list if there are no matches.
-            # Track.__album should return album object associated with the Track
-            # Track.__album.__title returns the title of the associated album
-            tracks = self._session_cm.session.query(Track).filter(Track.__album.__title == album_name).all()
+            tracks = self.get_tracks()
+            for i in range(len(tracks) - 1, -1, -1):
+                if tracks[i].album.title != album_name:
+                    tracks.pop(i)
+            #tracks = self._session_cm.session.query(Track).filter(Track.__album.__title == album_name).all()
         return tracks, album_name
 
     def get_tracks_artist(self, artist_name):

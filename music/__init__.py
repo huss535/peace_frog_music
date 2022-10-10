@@ -97,7 +97,6 @@ def create_app(test_config=None):
             # Solely generate mappings that map domain model classes to the database tables.
             map_model_to_tables()
 
-
     with app.app_context():
         # Register blueprints.
         from .home import home
