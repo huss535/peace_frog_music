@@ -2,7 +2,7 @@ from music.adapters.repository import AbstractRepository
 from music.domainmodel.album import Album
 from music.domainmodel.artist import Artist
 from music.domainmodel.genre import Genre
-
+from music.domainmodel.review import Review
 
 class MemoryRepository(AbstractRepository):
 
@@ -27,6 +27,20 @@ class MemoryRepository(AbstractRepository):
 
     def add_tracks(self, track):
         self.tracks.append(track)
+
+    def get_track(self, track_id: int):
+        for track in self.tracks:
+            if track.id == track_id:
+                return track
+        return None
+
+    def add_review(self, review: Review):
+        # call parent class first, add_review relies on implementation of code common to all derived classes
+        super().add_review(review)
+        self.__reviews.append(review)
+
+    def get_reviews(self):
+        return self.__reviews
 
     def get_tracks(self):
 

@@ -1,8 +1,10 @@
 from __future__ import annotations
+from typing import List, Iterable
 
 from music.domainmodel.artist import Artist
 from music.domainmodel.genre import Genre
 from music.domainmodel.album import Album
+from music.domainmodel.review import Review
 
 
 class Track:
@@ -21,6 +23,7 @@ class Track:
         # duration in seconds
         self.__track_duration: int | None = None
         self.__genres: list = []
+        self.__review: List[Review] = list()
 
     @property
     def track_id(self) -> int:
@@ -89,6 +92,19 @@ class Track:
         if not isinstance(new_genre, Genre) or new_genre in self.__genres:
             return
         self.__genres.append(new_genre)
+
+    @property
+    def reviews(self):
+        return self.__reviews
+
+    @property
+    def number_of_reviews(self) -> int:
+        return len(self.__reviews)
+
+    def add_review(self, new_review: Review):
+        if not isinstance(new_review, Review) or new_review in self.__review:
+            return
+        self.__review.append(new_review)
 
     def __repr__(self):
         return f"<Track {self.title}, track id = {self.track_id}>"

@@ -22,7 +22,7 @@ from music.artists import artists
 from music.albums import albums
 from music.trackList import trackList
 from music.authentication import authentication
-
+from music.reviews import reviews
 
 def create_some_track():
     some_track = Track(1, "Heat Waves")
@@ -113,6 +113,9 @@ def create_app(test_config=None):
 
         from music.artists.artists import handle_data
         app.register_blueprint(artists.artists_blueprint)
+
+        from music.reviews.reviews import handle_data
+        app.register_blueprint(reviews.reviews_blueprint)
 
         from .authentication import authentication
         app.register_blueprint(authentication.authentication_blueprint)

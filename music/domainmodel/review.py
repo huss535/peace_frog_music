@@ -4,7 +4,7 @@ from music.domainmodel.track import Track
 
 class Review:
 
-    def __init__(self, track: Track, review_text: str, rating: int):
+    def __init__(self, track: Track, review_text: str):
         self.__track = None
         if isinstance(track, Track):
             self.__track = track
@@ -35,6 +35,12 @@ class Review:
         else:
             self.__review_text = None
 
+    def make_review(review_text: str, track: Track):
+        review = Review(track, review_text)
+        track.add_review(review)
+        return review
+
+    # RATING IS DERELICT, WE SHALL IGNORE IT FOR NOW
     @property
     def rating(self) -> int:
         return self.__rating
@@ -46,7 +52,8 @@ class Review:
         else:
             self.__rating = None
             raise ValueError("Wrong value for the rating")
-
+    
+    # TIMESTAMP IS DERELICT, WE SHALL IGNORE IT FOR NOW
     @property
     def timestamp(self) -> datetime:
         return self.__timestamp
@@ -54,7 +61,8 @@ class Review:
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return False
-        return other.track == self.track and other.review_text == self.review_text and other.rating == self.rating and other.timestamp == self.timestamp
-
+        return other.track == self.track and other.review_text == self.review_text
+    
     def __repr__(self):
-        return f'<Review of track {self.track}, rating = {self.rating}, review_text = {self.review_text}>'
+        # return f'<Review of track {self.track}, rating = {self.rating}, review_text = {self.review_text}>'
+        return f'<Review of track {self.track}, review_text = {self.review_text}>'
