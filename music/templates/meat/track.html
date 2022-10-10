@@ -17,7 +17,23 @@
         <p>Artist: {{ track.artist }}</p>
         <p>Album: {{ track.album }}</p>
         <!-- Maybe be able to click on Artist and Album -->
+
+
+        <!-- ADD FORM TO ADD REVIEWS HERE -->
+
+        <!-- Reviews -->
+        {% if review_list|length == 0 %}
+            <h2>No Reviews were found!</h2>
+            <p>Be the first to add a review!</p>
+        {% else %}
+            <h2>Reviews:</h2>
+            {% for review in review_list %}
+            <p>{{review.review_text}}</p>
+                <br>
+            {% endfor %}
+        {% endif %}
     </body>
 
+    
 </main>
 {% endblock %}
